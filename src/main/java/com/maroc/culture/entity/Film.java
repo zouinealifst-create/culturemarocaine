@@ -3,6 +3,9 @@ package com.maroc.culture.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "films")
 @Getter
@@ -33,4 +36,14 @@ public class Film {
 
     @Column(columnDefinition = "TEXT")
     private String synopsis;
+
+    // --- Relation Many-to-Many avec Genre ---
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "film_genres",
+            joinColumns = @JoinColumn(name = "film_id"),
+            inverseJoinColumns = @JoinColumn(name = "genre_id")
+    )
+    @Builder.Default
+    private Set<Genre> genres = new HashSet<>();
 }
