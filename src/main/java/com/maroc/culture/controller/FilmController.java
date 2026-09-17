@@ -1,6 +1,9 @@
 package com.maroc.culture.controller;
 
+import com.maroc.culture.dto.RoleRequest;
 import com.maroc.culture.entity.Film;
+import com.maroc.culture.entity.FilmRole;
+import com.maroc.culture.service.FilmRoleService;
 import com.maroc.culture.service.FilmService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -61,4 +64,21 @@ public class FilmController {
         filmService.deleteAllFilm();
         return ResponseEntity.noContent().build(); // كيرجع 204 No Content
     }
+
+    // 1. زيد هاد السطر مع الـ dependencies الفوق:
+    private final FilmRoleService filmRoleService;
+
+    // 2. زيد هاد جوج ديال les méthodes لتحت:
+    @PostMapping("/{filmId}/roles")
+    public ResponseEntity<FilmRole> assignRole(
+            @PathVariable Long filmId,
+            @RequestBody RoleRequest request) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(filmRoleService.assignRoleToFilm(filmId, request));
+    }
+
+    @GetMapping("/{filmId}/roles")
+    public List<FilmRole> getFilmRoles(@PathVariable Long filmId) {
+        return filmRoleService.getRolesByFilmId(filmId);
+    }
+
 }
