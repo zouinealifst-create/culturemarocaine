@@ -44,6 +44,7 @@ public class Film {
             joinColumns = @JoinColumn(name = "film_id"),
             inverseJoinColumns = @JoinColumn(name = "genre_id")
     )
+
     @Builder.Default
     private Set<Genre> genres = new HashSet<>();
 }
