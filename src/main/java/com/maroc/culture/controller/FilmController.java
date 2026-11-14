@@ -18,6 +18,8 @@ import java.util.List;
 public class FilmController {
 
     private final FilmService filmService;
+    private final FilmRoleService filmRoleService;
+
 
     // 1. Récupérer tous les films (200 OK)
     @GetMapping
@@ -62,13 +64,10 @@ public class FilmController {
     @DeleteMapping
     public ResponseEntity<Void> deleteAllFilms() {
         filmService.deleteAllFilm();
-        return ResponseEntity.noContent().build(); // كيرجع 204 No Content
+        return ResponseEntity.noContent().build(); //  204 No Content
     }
 
-    // 1. زيد هاد السطر مع الـ dependencies الفوق:
-    private final FilmRoleService filmRoleService;
 
-    // 2. زيد هاد جوج ديال les méthodes لتحت:
     @PostMapping("/{filmId}/roles")
     public ResponseEntity<FilmRole> assignRole(
             @PathVariable Long filmId,
