@@ -55,6 +55,6 @@ public class GenreController {
     @DeleteMapping
     public ResponseEntity<Void> deleteAllGenres() {
         genreService.deleteAllGenres();
-        return ResponseEntity.noContent().build(); // كيرجع 204 No Content
+        return ResponseEntity.noContent().build();
     }
 }
