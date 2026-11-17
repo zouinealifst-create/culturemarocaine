@@ -41,7 +41,7 @@ public class PersonService {
         if (personRepository.existsByNameIgnoreCase(person.getName())) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Cette personne existe déjà !");
         }
-        person.setId(null); // باش نضمنو ديما INSERT جديد
+        person.setId(null); // Pour garantir toujours un nouvel INSERT
         return personRepository.save(person);
     }
 
@@ -52,14 +52,14 @@ public class PersonService {
             return personRepository.save(p);
         });
         /*
-            Optional<Person> optional = personRepository.findById(id);
-            if (optional.isPresent()) {
-                Person p = optional.get();
-                p.setName(updated.getName());
-                ...
-                return Optional.of(personRepository.save(p));
-            }
-            return Optional.empty();
-        */
+         * Optional<Person> optional = personRepository.findById(id);
+         * if (optional.isPresent()) {
+         * Person p = optional.get();
+         * p.setName(updated.getName());
+         * ...
+         * return Optional.of(personRepository.save(p));
+         * }
+         * return Optional.empty();
+         */
     }
 }
